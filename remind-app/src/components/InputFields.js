@@ -1,6 +1,7 @@
 import { Fragment, useState } from 'react';
 import { TextInput, createStyles } from '@mantine/core';
 import SubmitButton from '../UI/SubmitButton';
+import UserTable from './UserTable';
 
 const useStyles = createStyles((theme, { floating }) => ({
   root: {
@@ -39,16 +40,16 @@ const useStyles = createStyles((theme, { floating }) => ({
   },
 }));
 
-const InputFields = () => {
-  const [focused, setFocused] = useState(false);
-  const [name, setName] = useState('');
-  const [focused1, setFocused1] = useState(false);
-  const [phonenumber, setPhoneNumber] = useState('');
-  const [focused2, setFocused2] = useState(false);
-  const [bringing, setBringing] = useState('');
-  const { classes } = useStyles({ floating: name.trim().length !== 0 || focused });
-  const { classes1 } = useStyles({ floating1: phonenumber.trim().length !== 0 || focused1 });
-  const { classes2 } = useStyles({ floating2: bringing.trim().length !== 0 || focused2 });
+  const InputFields = () => {
+    const [focused, setFocused] = useState(false);
+    const [name, setName] = useState('');
+    const [focused1, setFocused1] = useState(false);
+    const [phonenumber, setPhoneNumber] = useState('');
+    const [focused2, setFocused2] = useState(false);
+    const [bringing, setBringing] = useState('');
+    const { classes } = useStyles({ floating: name.trim().length !== 0 || focused });
+    const { classes1 } = useStyles({ floating1: phonenumber.trim().length !== 0 || focused1 });
+    const { classes2 } = useStyles({ floating2: bringing.trim().length !== 0 || focused2 });
 
   return (
     <Fragment>
@@ -78,7 +79,7 @@ const InputFields = () => {
       />
       <TextInput
         label="Bringing"
-        placeholder="Bringing"
+        placeholder="888-888-8888"
         required
         classNames={classes2}
         bringing={bringing}
@@ -88,7 +89,8 @@ const InputFields = () => {
         mt="md"
         autoComplete="nope"
       />
-      <SubmitButton>{"Add To Group"}</SubmitButton>
+      
+      <UserTable name={name} phonenumber={phonenumber} bringing={bringing}/>
     </Fragment>
   );
 }

@@ -8,7 +8,7 @@ const Mainpage = () => {
         <div className={classes.formatter}>
             <div className={classes.center}>
                 <InputFields />
-                <UserTable />
+                
             </div>
         </div>
     )

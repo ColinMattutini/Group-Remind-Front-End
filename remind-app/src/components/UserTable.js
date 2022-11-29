@@ -1,12 +1,21 @@
-import React from 'react';
+import React, { Fragment, useState } from 'react';
 import { Table } from '@mantine/core';
-    const data = [
-        {number: 1, name: "Name Holder", phonenumber: "888-888-8888", bringing: "bringing test"},
-        {number: 2, name: "Second", phonenumber: "111-111-1111", bringing: "bringing test 2"}
-    ]
+import InputFields from './InputFields';
+import SubmitButton from '../UI/SubmitButton';
 
-const UserTable = () => {
+
+const UserTable = (props) => {
     
+    const [data, setData] = useState([]);
+    let key = 1;
+
+    const addUserToTable = (e) => {
+        e.preventDefault();
+        setData(data => [...data, {number: key, name: props.name, phonenumber: props.phonenumber, bringing: props.bringing}]);
+        key++;
+        console.log(data);
+    }
+
     const rows = data.map((element) => (
         <tr key={element.number}>
           <td>{element.name}</td>
@@ -15,18 +24,20 @@ const UserTable = () => {
           
         </tr>
       ));
-
-  return (
-        <Table horizontalSpacing="xs" fontSize="lg" highlightOnHover withBorder>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Phone Number</th>
-                    <th>Bringing</th>
-                </tr>
-            </thead>
-            <tbody>{rows}</tbody>
-        </Table>
+    return (
+        <Fragment>
+                <SubmitButton onClick={addUserToTable}>{"Add To Group"}</SubmitButton>
+                <Table horizontalSpacing="xs" fontSize="lg" highlightOnHover withBorder>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone Number</th>
+                            <th>Bringing</th>
+                        </tr>
+                    </thead>
+                    <tbody>{rows}</tbody>
+                </Table>
+            </Fragment>
 
   );
 }

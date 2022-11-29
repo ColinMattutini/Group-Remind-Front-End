@@ -1,5 +1,11 @@
-.center{
-    margin: auto;
-    max-width: 70%;
+.center{ 
+    max-width: 100%;
+    margin-top: 10%; 
     
+}
+
+.formatter{
+    display: flex;
+    min-height: 90vh;
+    justify-content: center;
 }

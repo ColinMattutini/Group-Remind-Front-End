@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useCallback, useEffect, useState } from 'react';
 import { TextInput, createStyles } from '@mantine/core';
 import SubmitButton from '../UI/SubmitButton';
 import UserTable from './UserTable';
@@ -51,6 +51,17 @@ const useStyles = createStyles((theme, { floating }) => ({
     const { classes1 } = useStyles({ floating1: phonenumber.trim().length !== 0 || focused1 });
     const { classes2 } = useStyles({ floating2: bringing.trim().length !== 0 || focused2 });
 
+    const resetInputFields = () => {
+  
+      setName('');
+      setPhoneNumber('');
+      setBringing('');
+    };
+
+    useEffect(() => {
+      resetInputFields();
+    }, [])
+
   return (
     <Fragment>
       <TextInput
@@ -58,8 +69,9 @@ const useStyles = createStyles((theme, { floating }) => ({
         placeholder="Name"
         required
         classNames={classes}
-        name={name}
+        value={name}
         onChange={(event) => setName(event.currentTarget.value)}
+        
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
         mt="md"
@@ -67,10 +79,10 @@ const useStyles = createStyles((theme, { floating }) => ({
       />
       <TextInput
         label="Phone Number"
-        placeholder="Phone Number"
+        placeholder="888-888-8888"
         required
         classNames={classes1}
-        phonenumber={phonenumber}
+        value={phonenumber}
         onChange={(event) => setPhoneNumber(event.currentTarget.value)}
         onFocus={() => setFocused1(true)}
         onBlur={() => setFocused1(false)}
@@ -79,10 +91,10 @@ const useStyles = createStyles((theme, { floating }) => ({
       />
       <TextInput
         label="Bringing"
-        placeholder="888-888-8888"
+        placeholder="Party"
         required
         classNames={classes2}
-        bringing={bringing}
+        value={bringing}
         onChange={(event) => setBringing(event.currentTarget.value)}
         onFocus={() => setFocused2(true)}
         onBlur={() => setFocused2(false)}
@@ -90,7 +102,8 @@ const useStyles = createStyles((theme, { floating }) => ({
         autoComplete="nope"
       />
       
-      <UserTable name={name} phonenumber={phonenumber} bringing={bringing}/>
+      <UserTable resetInputFields={resetInputFields} name={name} phonenumber={phonenumber} bringing={bringing}/>
+      
     </Fragment>
   );
 }

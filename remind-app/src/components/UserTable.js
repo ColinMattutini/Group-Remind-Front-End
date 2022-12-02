@@ -1,29 +1,37 @@
 import React, { Fragment, useState } from 'react';
 import { Table } from '@mantine/core';
-import InputFields from './InputFields';
 import SubmitButton from '../UI/SubmitButton';
-
+import UserRows from './UserRows';
 
 const UserTable = (props) => {
     
     const [data, setData] = useState([]);
-    let key = 1;
+    const [key, setKey] = useState(0);;
 
-    const addUserToTable = (e) => {
-        e.preventDefault();
-        setData(data => [...data, {number: key, name: props.name, phonenumber: props.phonenumber, bringing: props.bringing}]);
-        key++;
-        console.log(data);
+    const addUserToTable = () => {
+        if(props.name !== '' && props.phonenumber !== '' && props.bringing !== '' && props.phonenumber.length === 10){
+            setData(data => [...data, {number: key, name: props.name, phonenumber: props.phonenumber, bringing: props.bringing}]);
+            setKey(key + 1);
+            props.resetInputFields();
+            console.log(data);
+        }
     }
 
+     const deleteRow = (number) => {
+        setData(data.filter(el => el.number !== number))
+     }
+
     const rows = data.map((element) => (
-        <tr key={element.number}>
-          <td>{element.name}</td>
-          <td>{element.phonenumber}</td>
-          <td>{element.bringing}</td>
-          
-        </tr>
+        <UserRows 
+            key={element.number}
+            number={element.number}
+            name={element.name}
+            phonenumber={element.phonenumber}
+            bringing={element.bringing}
+            deleteRow={deleteRow}
+        />
       ));
+
     return (
         <Fragment>
                 <SubmitButton onClick={addUserToTable}>{"Add To Group"}</SubmitButton>
@@ -35,8 +43,12 @@ const UserTable = (props) => {
                             <th>Bringing</th>
                         </tr>
                     </thead>
-                    <tbody>{rows}</tbody>
+                    <tbody>
+                        {rows}
+                        
+                    </tbody>
                 </Table>
+                <button>Submit Group</button>
             </Fragment>
 
   );

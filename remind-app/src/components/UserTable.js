@@ -65,7 +65,7 @@ const UserTable = (props) => {
                         
                     </tbody>
                 </Table>
-                <button>Submit Group</button>
+                <button onClick={fetchSubmitGroup}>Submit Group</button>
             </Fragment>
 
   );

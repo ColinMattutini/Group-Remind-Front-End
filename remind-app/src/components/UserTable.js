@@ -13,7 +13,7 @@ const UserTable = (props) => {
             setData(data => [...data, {number: key, name: props.name, phonenumber: props.phonenumber, bringing: props.bringing}]);
             setKey(key + 1);
             props.resetInputFields();
-            console.log(data);
+            
         }
     }
 

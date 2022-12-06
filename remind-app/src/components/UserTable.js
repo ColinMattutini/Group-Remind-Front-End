@@ -32,6 +32,23 @@ const UserTable = (props) => {
         />
       ));
 
+
+    const fetchSubmitGroup = async () => {
+        await fetch(
+            'http://localhost:8080/sendSMS',
+            {
+                method:"GET",
+                body: JSON.stringify({
+                    data: data
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+
+            }
+        )
+    }
+
     return (
         <Fragment>
                 <SubmitButton onClick={addUserToTable}>{"Add To Group"}</SubmitButton>

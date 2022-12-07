@@ -39,7 +39,7 @@ const UserTable = (props) => {
             {
                 method:"GET",
                 body: JSON.stringify({
-                    data: data
+                    message: data
                 }),
                 headers: {
                     'Content-Type': 'application/json'
